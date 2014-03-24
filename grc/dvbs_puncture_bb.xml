@@ -1,0 +1,40 @@
+<block>
+  <name>Puncture</name>
+  <key>dvbs_puncture_bb</key>
+  <category>dvbs</category>
+  <import>import dvbs</import>
+  <make>dvbs.puncture_bb($rate)</make>
+  <param>
+    <name>Code rate</name>
+    <key>rate</key>
+    <type>enum</type>
+    <option>
+      <name>1/2</name>
+      <key>0</key>
+    </option>
+    <option>
+      <name>2/3</name>
+      <key>1</key>
+    </option>
+    <option>
+      <name>3/4</name>
+      <key>2</key>
+    </option>
+    <option>
+      <name>5/6</name>
+      <key>3</key>
+    </option>
+    <option>
+      <name>7/8</name>
+      <key>4</key>
+    </option>
+  </param>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

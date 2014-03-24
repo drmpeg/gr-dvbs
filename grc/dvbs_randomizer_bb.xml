@@ -1,0 +1,15 @@
+<block>
+  <name>Randomizer</name>
+  <key>dvbs_randomizer_bb</key>
+  <category>dvbs</category>
+  <import>import dvbs</import>
+  <make>dvbs.randomizer_bb()</make>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

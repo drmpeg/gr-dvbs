@@ -1,0 +1,15 @@
+<block>
+  <name>Reed-Solomon Encoder</name>
+  <key>dvbs_reed_solomon_enc_bb</key>
+  <category>dvbs</category>
+  <import>import dvbs</import>
+  <make>dvbs.reed_solomon_enc_bb()</make>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>
