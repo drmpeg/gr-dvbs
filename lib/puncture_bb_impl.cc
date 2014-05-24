@@ -29,7 +29,7 @@ namespace gr {
   namespace dvbs {
 
     puncture_bb::sptr
-    puncture_bb::make(int rate)
+    puncture_bb::make(dvbs_code_rate_t rate)
     {
       return gnuradio::get_initial_sptr
         (new puncture_bb_impl(rate));
@@ -38,7 +38,7 @@ namespace gr {
     /*
      * The private constructor
      */
-    puncture_bb_impl::puncture_bb_impl(int rate)
+    puncture_bb_impl::puncture_bb_impl(dvbs_code_rate_t rate)
       : gr::block("puncture_bb",
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(unsigned char))),

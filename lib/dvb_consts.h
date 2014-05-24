@@ -75,16 +75,4 @@ static const int DWELL_DURATION = 60*204*8;
 // Baseband shaping
 static const float RRC_ROLLOFF_FACTOR = 0.35;
 
-namespace gr {
-  namespace dvbs {
-    enum dvbs_code_rate_t {
-      C1_2 = 0,
-      C2_3,
-      C3_4,
-      C5_6,
-      C7_8,
-    };
-  } // namespace dvbs
-} // namespace gr
-
 #endif // INCLUDED_DVB_CONSTS_H

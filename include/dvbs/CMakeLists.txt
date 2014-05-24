@@ -22,6 +22,7 @@
 ########################################################################
 install(FILES
     api.h
+    dvbs_config.h
     randomizer_bb.h
     reed_solomon_enc_bb.h
     interleaver_bb.h

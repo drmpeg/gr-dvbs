@@ -12,9 +12,11 @@
 #include "dvbs/reed_solomon_enc_bb.h"
 #include "dvbs/interleaver_bb.h"
 #include "dvbs/puncture_bb.h"
+#include "dvbs/dvbs_config.h"
 %}
 
 
+%include "dvbs/dvbs_config.h"
 %include "dvbs/randomizer_bb.h"
 GR_SWIG_BLOCK_MAGIC2(dvbs, randomizer_bb);
 %include "dvbs/reed_solomon_enc_bb.h"

@@ -39,6 +39,7 @@ def main(args):
 
     symbol_rate = 4500000
     samp_rate = symbol_rate * 2
+    code_rate = dvbs.C1_2
     rrc_taps = 20
     center_freq = 435000000
     txvga1_gain = -4
@@ -55,7 +56,7 @@ def main(args):
     blocks_packed_to_unpacked = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
     trellis_encoder = trellis.encoder_bb(trellis.fsm(1, 2, (0171, 0133)), 0)
     blocks_unpack_k_bits = blocks.unpack_k_bits_bb(2)
-    dvbs_puncture = dvbs.puncture_bb(4)
+    dvbs_puncture = dvbs.puncture_bb(code_rate)
     blocks_pack_k_bits = blocks.pack_k_bits_bb(2)
     digital_chunks_to_symbols = digital.chunks_to_symbols_bc(([complex(0.70710678,0.70710678), complex(0.70710678,-0.70710678), complex(-0.70710678,0.70710678), complex(-0.70710678,-0.70710678)]), 1)
     interp_fir_filter = filter.interp_fir_filter_ccc(2, (firdes.root_raised_cosine(1.79, samp_rate, samp_rate/2, 0.35, rrc_taps)))

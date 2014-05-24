@@ -2,7 +2,7 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Dvbs Tx
-# Generated: Mon Mar 24 16:11:42 2014
+# Generated: Sat May 24 10:04:22 2014
 ##################################################
 
 from gnuradio import blocks
@@ -68,7 +68,7 @@ class dvbs_tx(grc_wxgui.top_block_gui):
         self.interp_fir_filter_xxx_0.declare_sample_delay(0)
         self.dvbs_reed_solomon_enc_bb_0 = dvbs.reed_solomon_enc_bb()
         self.dvbs_randomizer_bb_0 = dvbs.randomizer_bb()
-        self.dvbs_puncture_bb_0 = dvbs.puncture_bb(4)
+        self.dvbs_puncture_bb_0 = dvbs.puncture_bb(dvbs.C1_2)
         self.dvbs_interleaver_bb_0 = dvbs.interleaver_bb()
         self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc(([complex(0.70710678,0.70710678), complex(0.70710678,-0.70710678), complex(-0.70710678,0.70710678), complex(-0.70710678,-0.70710678)]), 1)
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(2)

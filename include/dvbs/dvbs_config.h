@@ -19,39 +19,22 @@
  */
 
 
-#ifndef INCLUDED_DVBS_PUNCTURE_BB_H
-#define INCLUDED_DVBS_PUNCTURE_BB_H
-
-#include <dvbs/api.h>
-#include <dvbs/dvbs_config.h>
-#include <gnuradio/block.h>
+#ifndef INCLUDED_DVBS_CONFIG_H
+#define INCLUDED_DVBS_CONFIG_H
 
 namespace gr {
   namespace dvbs {
-
-    /*!
-     * \brief <+description of block+>
-     * \ingroup dvbs
-     *
-     */
-    class DVBS_API puncture_bb : virtual public gr::block
-    {
-     public:
-      typedef boost::shared_ptr<puncture_bb> sptr;
-
-      /*!
-       * \brief Return a shared_ptr to a new instance of dvbs::puncture_bb.
-       *
-       * To avoid accidental use of raw pointers, dvbs::puncture_bb's
-       * constructor is in a private implementation
-       * class. dvbs::puncture_bb::make is the public interface for
-       * creating new instances.
-       */
-      static sptr make(dvbs_code_rate_t rate);
+    enum dvbs_code_rate_t {
+      C1_2 = 0,
+      C2_3,
+      C3_4,
+      C5_6,
+      C7_8,
     };
-
   } // namespace dvbs
 } // namespace gr
 
-#endif /* INCLUDED_DVBS_PUNCTURE_BB_H */
+typedef gr::dvbs::dvbs_code_rate_t dvbs_code_rate_t;
+
+#endif /* INCLUDED_DVBS_CONFIG_H */
 

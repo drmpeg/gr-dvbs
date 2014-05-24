@@ -36,7 +36,7 @@ namespace gr {
       int P[14];
 
      public:
-      puncture_bb_impl(int rate);
+      puncture_bb_impl(dvbs_code_rate_t rate);
       ~puncture_bb_impl();
 
       // Where all the action really happens
