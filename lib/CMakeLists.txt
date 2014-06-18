@@ -28,7 +28,8 @@ list(APPEND dvbs_sources
     randomizer_bb_impl.cc
     reed_solomon_enc_bb_impl.cc
     interleaver_bb_impl.cc
-    puncture_bb_impl.cc )
+    puncture_bb_impl.cc
+    modulator_bc_impl.cc )
 
 set(dvbs_sources "${dvbs_sources}" PARENT_SCOPE)
 if(NOT dvbs_sources)
@@ -39,6 +40,8 @@ endif(NOT dvbs_sources)
 add_library(gnuradio-dvbs SHARED ${dvbs_sources})
 target_link_libraries(gnuradio-dvbs ${Boost_LIBRARIES} ${GNURADIO_ALL_LIBRARIES})
 set_target_properties(gnuradio-dvbs PROPERTIES DEFINE_SYMBOL "gnuradio_dvbs_EXPORTS")
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
 if(APPLE)
     set_target_properties(gnuradio-dvbs PROPERTIES

@@ -44,38 +44,45 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(unsigned char))),
       index(0)
       {
+          int j;
           switch (rate)
           {
               case gr::dvbs::C1_2:
                   nbits_keep = 2;
                   nbits_total = 2;
-                  P[0] = 1;
-                  P[1] = 1;
+                  P[0][0] = 1;
+                  P[1][0] = 1;
                   break;
               case gr::dvbs::C2_3:
                   nbits_keep = 3;
                   nbits_total = 4;
-                  P[0] = 1; P[2] = 0;
-                  P[1] = 1; P[3] = 1;
+                  P[0][0] = 1; P[2][0] = 0;
+                  P[1][0] = 1; P[3][0] = 1;
                   break;
               case gr::dvbs::C3_4:
                   nbits_keep = 4;
                   nbits_total = 6;
-                  P[0] = 1; P[2] = 0; P[4] = 1;
-                  P[1] = 1; P[3] = 1; P[5] = 0;
+                  P[0][0] = 1; P[2][0] = 0; P[4][0] = 1;
+                  P[1][0] = 1; P[3][0] = 1; P[5][0] = 0;
                   break;
               case gr::dvbs::C5_6:
                   nbits_keep = 6;
                   nbits_total = 10;
-                  P[0] = 1; P[2] = 0; P[4] = 1; P[6] = 0; P[8] = 1;
-                  P[1] = 1; P[3] = 1; P[5] = 0; P[7] = 1; P[9] = 0;
+                  P[0][0] = 1; P[2][0] = 0; P[4][0] = 1; P[6][0] = 0; P[8][0] = 1;
+                  P[1][0] = 1; P[3][0] = 1; P[5][0] = 0; P[7][0] = 1; P[9][0] = 0;
                   break;
               case gr::dvbs::C7_8:
                   nbits_keep = 8;
                   nbits_total = 14;
-                  P[0] = 1; P[2] = 0; P[4] = 0; P[6] = 0; P[8] = 1; P[10] = 0; P[12] = 1;
-                  P[1] = 1; P[3] = 1; P[5] = 1; P[7] = 1; P[9] = 0; P[11] = 1; P[13] = 0;
+                  P[0][0] = 1; P[2][0] = 0; P[4][0] = 0; P[6][0] = 0; P[8][0] = 1; P[10][0] = 0; P[12][0] = 1;
+                  P[1][0] = 1; P[3][0] = 1; P[5][0] = 1; P[7][0] = 1; P[9][0] = 0; P[11][0] = 1; P[13][0] = 0;
                   break;
+          }
+          j = 1;
+          for (int i = 0; i < 14; i++)
+          {
+              P[i][1] = j;
+              j = (j + 1) % nbits_total;
           }
       }
 
@@ -105,18 +112,21 @@ namespace gr {
 
         int ni = 0;
         int no = 0;
+        unsigned int j;
 
         // Terminate when we run out of either input data or output capacity
+        j = index;
         while (ni < ninput_items[0] && no < noutput_items)
         {
-            if (P[index] != 0)    // Not punctured, so copy across
+            if (P[j][0] != 0)    // Not punctured, so copy across
             {
                 out[no] = in[ni];
                 ++no;
             }
             ++ni;
-            index = (index + 1) % nbits_total;
+            j = P[j][1];
         }
+        index = j;
 
         // Tell runtime system how many input items we consumed on
         // each input stream.

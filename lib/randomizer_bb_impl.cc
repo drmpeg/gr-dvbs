@@ -68,7 +68,7 @@ namespace gr {
             {
                 // Append the next LFSR output to LSB of output
                 byte <<= 1;
-                bit = (state & 0x0002) >> 1 ^ state & 0x0001;
+                bit = (state & 0x0002) >> 1 ^ (state & 0x0001);
                 byte |= bit;
                 // Shift the LFSR bits by 1 and feed output bit back to the start
                 state >>= 1;

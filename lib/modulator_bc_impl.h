@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2010 Edmund Tse, 2014 Ron Economos.
+ * Copyright 2014 Ron Economos.
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,26 +18,22 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#ifndef INCLUDED_DVBS_PUNCTURE_BB_IMPL_H
-#define INCLUDED_DVBS_PUNCTURE_BB_IMPL_H
+#ifndef INCLUDED_DVBS_MODULATOR_BC_IMPL_H
+#define INCLUDED_DVBS_MODULATOR_BC_IMPL_H
 
-#include <dvbs/puncture_bb.h>
-#include "dvb_consts.h"
+#include <dvbs/modulator_bc.h>
 
 namespace gr {
   namespace dvbs {
 
-    class puncture_bb_impl : public puncture_bb
+    class modulator_bc_impl : public modulator_bc
     {
      private:
-      unsigned int index;
-      unsigned int nbits_keep;    // Number of bits to keep
-      unsigned int nbits_total;   // Number of bits in puncturing sequence
-      int P[14][2];
+      gr_complex qpsk[5];
 
      public:
-      puncture_bb_impl(dvbs_code_rate_t rate);
-      ~puncture_bb_impl();
+      modulator_bc_impl();
+      ~modulator_bc_impl();
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
@@ -51,5 +47,5 @@ namespace gr {
   } // namespace dvbs
 } // namespace gr
 
-#endif /* INCLUDED_DVBS_PUNCTURE_BB_IMPL_H */
+#endif /* INCLUDED_DVBS_MODULATOR_BC_IMPL_H */
 

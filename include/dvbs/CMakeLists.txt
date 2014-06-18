@@ -26,5 +26,6 @@ install(FILES
     randomizer_bb.h
     reed_solomon_enc_bb.h
     interleaver_bb.h
-    puncture_bb.h DESTINATION include/dvbs
+    puncture_bb.h
+    modulator_bc.h DESTINATION include/dvbs
 )

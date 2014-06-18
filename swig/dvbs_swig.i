@@ -13,6 +13,7 @@
 #include "dvbs/interleaver_bb.h"
 #include "dvbs/puncture_bb.h"
 #include "dvbs/dvbs_config.h"
+#include "dvbs/modulator_bc.h"
 %}
 
 
@@ -27,3 +28,5 @@ GR_SWIG_BLOCK_MAGIC2(dvbs, interleaver_bb);
 
 %include "dvbs/puncture_bb.h"
 GR_SWIG_BLOCK_MAGIC2(dvbs, puncture_bb);
+%include "dvbs/modulator_bc.h"
+GR_SWIG_BLOCK_MAGIC2(dvbs, modulator_bc);

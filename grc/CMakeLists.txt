@@ -20,5 +20,6 @@ install(FILES
     dvbs_randomizer_bb.xml
     dvbs_reed_solomon_enc_bb.xml
     dvbs_interleaver_bb.xml
-    dvbs_puncture_bb.xml DESTINATION share/gnuradio/grc/blocks
+    dvbs_puncture_bb.xml
+    dvbs_modulator_bc.xml DESTINATION share/gnuradio/grc/blocks
 )

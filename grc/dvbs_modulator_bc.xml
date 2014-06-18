@@ -1,0 +1,15 @@
+<block>
+  <name>DVB-S Modulator</name>
+  <key>dvbs_modulator_bc</key>
+  <category>dvbs</category>
+  <import>import dvbs</import>
+  <make>dvbs.modulator_bc()</make>
+  <sink>
+    <name>in</name>
+    <type>byte</type>
+  </sink>
+  <source>
+    <name>out</name>
+    <type>complex</type>
+  </source>
+</block>

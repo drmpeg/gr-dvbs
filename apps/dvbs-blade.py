@@ -58,9 +58,9 @@ def main(args):
     blocks_unpack_k_bits = blocks.unpack_k_bits_bb(2)
     dvbs_puncture = dvbs.puncture_bb(code_rate)
     blocks_pack_k_bits = blocks.pack_k_bits_bb(2)
-    digital_chunks_to_symbols = digital.chunks_to_symbols_bc(([complex(0.70710678,0.70710678), complex(0.70710678,-0.70710678), complex(-0.70710678,0.70710678), complex(-0.70710678,-0.70710678)]), 1)
-    interp_fir_filter = filter.interp_fir_filter_ccc(2, (firdes.root_raised_cosine(1.79, samp_rate, samp_rate/2, 0.35, rrc_taps)))
-    interp_fir_filter.declare_sample_delay(0)
+    dvbs_modulator = dvbs.modulator_bc()
+    fft_filter = filter.fft_filter_ccc(1, (firdes.root_raised_cosine(1.79, samp_rate, samp_rate/2, 0.35, rrc_taps)), 1)
+    fft_filter.declare_sample_delay(0)
 
     out = osmosdr.sink(args="bladerf=0,buffers=128,buflen=32768")
     out.set_sample_rate(samp_rate)
@@ -78,13 +78,13 @@ def main(args):
     tb.connect(trellis_encoder, blocks_unpack_k_bits)
     tb.connect(blocks_unpack_k_bits, dvbs_puncture)
     tb.connect(dvbs_puncture, blocks_pack_k_bits)
-    tb.connect(blocks_pack_k_bits, digital_chunks_to_symbols)
-    tb.connect(digital_chunks_to_symbols, interp_fir_filter)
-    tb.connect(interp_fir_filter, out)
+    tb.connect(blocks_pack_k_bits, dvbs_modulator)
+    tb.connect(dvbs_modulator, fft_filter)
+    tb.connect(fft_filter, out)
 
     if outfile:
         dst = blocks.file_sink(gr.sizeof_gr_complex, outfile)
-        tb.connect(interp_fir_filter, dst)
+        tb.connect(fft_filter, dst)
 
     tb.run()
 

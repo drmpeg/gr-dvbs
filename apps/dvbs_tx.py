@@ -2,11 +2,10 @@
 ##################################################
 # Gnuradio Python Flow Graph
 # Title: Dvbs Tx
-# Generated: Sat May 24 10:04:22 2014
+# Generated: Wed Jun 18 01:23:58 2014
 ##################################################
 
 from gnuradio import blocks
-from gnuradio import digital
 from gnuradio import eng_notation
 from gnuradio import filter
 from gnuradio import gr
@@ -64,13 +63,13 @@ class dvbs_tx(grc_wxgui.top_block_gui):
         self.osmosdr_sink_0.set_antenna("", 0)
         self.osmosdr_sink_0.set_bandwidth(6000000, 0)
           
-        self.interp_fir_filter_xxx_0 = filter.interp_fir_filter_ccc(2, (firdes.root_raised_cosine(1.79, samp_rate, samp_rate/2, 0.35, rrc_taps)))
-        self.interp_fir_filter_xxx_0.declare_sample_delay(0)
+        self.fft_filter_xxx_0 = filter.fft_filter_ccc(1, (firdes.root_raised_cosine(1.79, samp_rate, samp_rate/2, 0.35, rrc_taps)), 1)
+        self.fft_filter_xxx_0.declare_sample_delay(0)
         self.dvbs_reed_solomon_enc_bb_0 = dvbs.reed_solomon_enc_bb()
         self.dvbs_randomizer_bb_0 = dvbs.randomizer_bb()
         self.dvbs_puncture_bb_0 = dvbs.puncture_bb(dvbs.C1_2)
+        self.dvbs_modulator_bc_0 = dvbs.modulator_bc()
         self.dvbs_interleaver_bb_0 = dvbs.interleaver_bb()
-        self.digital_chunks_to_symbols_xx_0 = digital.chunks_to_symbols_bc(([complex(0.70710678,0.70710678), complex(0.70710678,-0.70710678), complex(-0.70710678,0.70710678), complex(-0.70710678,-0.70710678)]), 1)
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(2)
         self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(1, gr.GR_MSB_FIRST)
         self.blocks_pack_k_bits_bb_0 = blocks.pack_k_bits_bb(2)
@@ -84,13 +83,13 @@ class dvbs_tx(grc_wxgui.top_block_gui):
         self.connect((self.dvbs_reed_solomon_enc_bb_0, 0), (self.dvbs_interleaver_bb_0, 0))
         self.connect((self.dvbs_interleaver_bb_0, 0), (self.blocks_packed_to_unpacked_xx_0, 0))
         self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.trellis_encoder_xx_0, 0))
-        self.connect((self.interp_fir_filter_xxx_0, 0), (self.wxgui_fftsink2_0, 0))
-        self.connect((self.interp_fir_filter_xxx_0, 0), (self.osmosdr_sink_0, 0))
         self.connect((self.trellis_encoder_xx_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
         self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.dvbs_puncture_bb_0, 0))
         self.connect((self.dvbs_puncture_bb_0, 0), (self.blocks_pack_k_bits_bb_0, 0))
-        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.digital_chunks_to_symbols_xx_0, 0))
-        self.connect((self.digital_chunks_to_symbols_xx_0, 0), (self.interp_fir_filter_xxx_0, 0))
+        self.connect((self.dvbs_modulator_bc_0, 0), (self.fft_filter_xxx_0, 0))
+        self.connect((self.blocks_pack_k_bits_bb_0, 0), (self.dvbs_modulator_bc_0, 0))
+        self.connect((self.fft_filter_xxx_0, 0), (self.osmosdr_sink_0, 0))
+        self.connect((self.fft_filter_xxx_0, 0), (self.wxgui_fftsink2_0, 0))
 
 
 # QT sink close method reimplementation
@@ -108,7 +107,7 @@ class dvbs_tx(grc_wxgui.top_block_gui):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
-        self.interp_fir_filter_xxx_0.set_taps((firdes.root_raised_cosine(1.79, self.samp_rate, self.samp_rate/2, 0.35, self.rrc_taps)))
+        self.fft_filter_xxx_0.set_taps((firdes.root_raised_cosine(1.79, self.samp_rate, self.samp_rate/2, 0.35, self.rrc_taps)))
         self.osmosdr_sink_0.set_sample_rate(self.samp_rate)
 
     def get_rrc_taps(self):
@@ -116,7 +115,7 @@ class dvbs_tx(grc_wxgui.top_block_gui):
 
     def set_rrc_taps(self, rrc_taps):
         self.rrc_taps = rrc_taps
-        self.interp_fir_filter_xxx_0.set_taps((firdes.root_raised_cosine(1.79, self.samp_rate, self.samp_rate/2, 0.35, self.rrc_taps)))
+        self.fft_filter_xxx_0.set_taps((firdes.root_raised_cosine(1.79, self.samp_rate, self.samp_rate/2, 0.35, self.rrc_taps)))
 
 if __name__ == '__main__':
     import ctypes
