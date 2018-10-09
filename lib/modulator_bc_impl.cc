@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2014 Ron Economos.
+ * Copyright 2014,2018 Ron Economos.
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -43,16 +43,11 @@ namespace gr {
               gr::io_signature::make(1, 1, sizeof(unsigned char)),
               gr::io_signature::make(1, 1, sizeof(gr_complex)))
     {
-        qpsk[0].real() = (cos(M_PI / 4.0));
-        qpsk[0].imag() = (sin(M_PI / 4.0));
-        qpsk[1].real() = (cos(7 * M_PI / 4.0));
-        qpsk[1].imag() = (sin(7 * M_PI / 4.0));
-        qpsk[2].real() = (cos(3 * M_PI / 4.0));
-        qpsk[2].imag() = (sin(3 * M_PI / 4.0));
-        qpsk[3].real() = (cos(5 * M_PI / 4.0));
-        qpsk[3].imag() = (sin(5 * M_PI / 4.0));
-        qpsk[4].real() = 0.0;
-        qpsk[4].imag() = 0.0;
+        qpsk[0] = gr_complex(cos(M_PI / 4.0), sin(M_PI / 4.0));
+        qpsk[1] = gr_complex(cos(7 * M_PI / 4.0), sin(7 * M_PI / 4.0));
+        qpsk[2] = gr_complex(cos(3 * M_PI / 4.0), sin(3 * M_PI / 4.0));
+        qpsk[3] = gr_complex(cos(5 * M_PI / 4.0), sin(5 * M_PI / 4.0));
+        qpsk[4] = gr_complex(0.0, 0.0);
         set_output_multiple(2);
     }
 
